@@ -1,24 +1,17 @@
 import task2 as t2
 
-# Test the integer function
+# Test if the integer variable is integer
 def test_int():
-    # Check if the values are floating point
-    # or integer numbers respectively.
-    assert t2.divide_by_int(1001) == 500.5
-    assert t2.divide_by_int(1000) == 500
+    assert isinstance(t2.integer_var, int)
 
-# Test the float function
+# Test if the float variable is an integer
 def test_float():
-    assert t2.divide_by_float(1001) == 394.09
-    assert t2.divide_by_float(1000) == 393.70
+    assert isinstance(t2.float_var, float)
 
+# Test if the string variable is a string
 def test_string():
-    # Test if the string was reversed
-    assert t2.reverse_string("desserts") == "stressed"
+    assert isinstance(t2.string_var, str)
 
+# Test if the boolean variable is a boolean
 def test_bool():
-    # Check if the xor function is correct 
-    # for expected output
-    assert t2.my_xor_func(True, True) == False
-    assert t2.my_xor_func(False, False) == False
-    assert t2.my_xor_func(True, False) == True
+    assert isinstance(t2.boolean_var, bool)

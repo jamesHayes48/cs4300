@@ -14,7 +14,6 @@ def test_valid_discount():
 # Test invalid cases for discount function
 def test_invalid_discount():
     # Test that function does not accept non-numeric variables
-    # In all cases below
     with pytest.raises(TypeError) as excinfo:
         t4.calculate_discount("Extra", "Silly")
     assert str(excinfo.value) == "Error, user_price and user_discount must be of type int or float"
@@ -28,7 +27,6 @@ def test_invalid_discount():
     assert str(excinfo.value) == "Error, user_price and user_discount must be of type int or float"
 
     # Check that negative numbers are not accepted below
-    # In all cases below
     with pytest.raises(ValueError) as excinfo:
         t4.calculate_discount(-20, -2)
     assert str(excinfo.value) == "Error, user_price and user_discount must be non-negative"

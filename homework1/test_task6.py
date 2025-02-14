@@ -10,12 +10,11 @@ files_to_test = {
 def generate_pytest(files):
     for name, word_count in files.items():
         
-        # Remove .txt for function name
-        function_name = f"test_{name[:-4]}"
+        # Remove replace . with _ in function name
+        function_name = f"test_{name.replace('.', '_')}"
 
         # Create function and call it soon after
         exec(f"def {function_name}(): assert t6.count_words('{name}') == {word_count}", globals())
-        globals()[function_name]()
 
 
 generate_pytest(files_to_test)

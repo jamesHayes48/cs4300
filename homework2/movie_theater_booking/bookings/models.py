@@ -8,10 +8,16 @@ class Movie(models.Model):
     release_date = models.DateField()
     duration = models.PositiveIntegerField(help_text="Duration of movie in minutes")
 
+    def __str__(self):
+        return self.title
+
 
 class Seat(models.Model):
     seat_number = models.CharField(max_length=3, unique=True)
     booking_status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.seat_number
 
 
 class Booking(models.Model):

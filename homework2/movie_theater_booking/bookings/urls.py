@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.register(r'movies', MovieViewSet)
 
 urlpatterns = [
-    path('', MovieViewSet.as_view({'get': 'list', 'post': 'create'}))
+    #path('', MovieViewSet.as_view({'get': 'list', 'post': 'create'}))
 ]

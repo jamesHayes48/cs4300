@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404, render
 from rest_framework.permissions import(IsAuthenticated, IsAdminUser, )
+from .forms import BookingForm
 
 # Create your views here.
 class MovieViewSet(viewsets.ViewSet):
@@ -74,3 +75,24 @@ def movie_list(request):
     
     # Render the template with the movies context
     return render(request, 'bookings/movie_list.html', {'movies': movies})
+
+# Send user to book a seat at the movie requested
+def book_seat(request, movie_id):
+    context = {}
+    selected_movie = get_object_or_404(Movie, id=movie_id)
+    form = BookingForm()
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            selected_seat = form.cleaned_data['seat']
+            selected_date = form.cleaned_data['booking_date']
+
+            booking = Booking.objects.create(movie=selected_movie, seat=selected_seat, booking_date=selected_date, user=request.user)
+            selected_seat.booking_status = True
+            selected_seat.save()
+
+    context['form'] = form
+    context['movie'] = selected_movie
+          
+    return render(request, 'bookings/seat_booking.html', context)

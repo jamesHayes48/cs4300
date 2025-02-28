@@ -9,6 +9,7 @@
             <p>{{movie.description}}</p>
             <p>Released: {{movie.release_date}}</p>
             <p>Duration: {{movie.duration}} minutes</p>
+            <a href="{% url 'book_seat' movie.id %}" class="btn btn-primary">Book Now</a>
         </li>
     {% endfor %} 
 </ul>

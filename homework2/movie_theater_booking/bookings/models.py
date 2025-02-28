@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Movie(models.Model):
@@ -13,11 +14,11 @@ class Movie(models.Model):
 
 
 class Seat(models.Model):
-    seat_number = models.CharField(max_length=3, unique=True)
+    seat_number = models.SmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], unique=True)
     booking_status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.seat_number
+        return str(self.seat_number)
 
 
 class Booking(models.Model):
@@ -25,3 +26,6 @@ class Booking(models.Model):
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     booking_date = models.DateField()
+
+    class Meta:
+        unique_together = ('seat', 'booking_date', 'user')

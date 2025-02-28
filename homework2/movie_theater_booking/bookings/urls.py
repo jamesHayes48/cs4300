@@ -10,9 +10,10 @@ router.register(r'seats', SeatViewSet)
 router.register(r'bookings', BookingViewSet, basename='booking')
 
 urlpatterns = [
-    path('', include(router.urls)),
-
+    path('api/', include(router.urls)),
+    path('', views.movie_list, name='movie_list'),
     path('movie_list/', views.movie_list, name='movie_list'),
+    path('seat_booking/<int:movie_id>/', views.book_seat, name="book_seat")
     #path('booking_history/', views.booking_history, name='booking_history'),
     #path('seat_booking/', views.seat_booking, name='seat_booking'),
 ]

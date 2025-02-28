@@ -85,8 +85,9 @@ def book_seat(request, movie_id):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
+            print(request.user)
             selected_seat = form.cleaned_data['seat']
-            selected_date = form.cleaned_data['booking_date']
+            selected_date = form.cleaned_data['date']
 
             booking = Booking.objects.create(movie=selected_movie, seat=selected_seat, booking_date=selected_date, user=request.user)
             selected_seat.booking_status = True

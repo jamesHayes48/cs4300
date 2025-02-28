@@ -10,7 +10,7 @@ class BookingForm(forms.ModelForm):
                                   label="Seat Number", empty_label="Select a seat", required=True)
     
     # Enforce that dates cannot be entered before the current day
-    date = forms.DateField(widget=forms.SelectDateWidget(), validators=[MinValueValidator(datetime.date.today())], label="Booking Date")
+    date = forms.DateField(widget=forms.SelectDateWidget(), validators=[MinValueValidator(datetime.date.today())], label="date")
     class Meta:
         model = Booking
         fields = ['date', 'seat']

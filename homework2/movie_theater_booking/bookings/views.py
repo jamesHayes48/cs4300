@@ -1,5 +1,6 @@
 from .models import Movie, Seat, Booking
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
+from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -76,7 +77,9 @@ def movie_list(request):
     # Render the template with the movies context
     return render(request, 'bookings/movie_list.html', {'movies': movies})
 
-# Send user to book a seat at the movie requested
+
+# Send user to book a seat at the movie requested, login if user is anonymous
+@login_required
 def book_seat(request, movie_id):
     context = {}
     selected_movie = get_object_or_404(Movie, id=movie_id)
@@ -85,7 +88,6 @@ def book_seat(request, movie_id):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            print(request.user)
             selected_seat = form.cleaned_data['seat']
             selected_date = form.cleaned_data['date']
 
@@ -97,3 +99,10 @@ def book_seat(request, movie_id):
     context['movie'] = selected_movie
           
     return render(request, 'bookings/seat_booking.html', context)
+
+# Return user's bookings made
+@login_required
+def booking_history(request):
+    bookings = Booking.objects.filter(user=request.user)
+
+    return render(request, 'bookings/booking_history.html', {'bookings': bookings})

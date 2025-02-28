@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 import datetime
+from django.utils.timezone import now
 from .models import Booking, Seat
 
 class BookingForm(forms.ModelForm):
@@ -10,10 +11,11 @@ class BookingForm(forms.ModelForm):
                                   label="Seat Number", empty_label="Select a seat", required=True)
     
     # Enforce that dates cannot be entered before the current day
-    date = forms.DateField(widget=forms.SelectDateWidget(), validators=[MinValueValidator(datetime.date.today())], label="date")
+    date = forms.DateField(widget=forms.SelectDateWidget(), validators=[MinValueValidator(datetime.date.today())], label="date", initial=now)
     class Meta:
         model = Booking
         fields = ['date', 'seat']
+
     
     def clean_seat(self):
         selected_seat = self.cleaned_data['seat']

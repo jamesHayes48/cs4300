@@ -1,4 +1,6 @@
 <!-- Base is where html code is shared between all sites -->
+{% load static %}
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -10,9 +12,11 @@
         <title>Base Booking Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #aacce5;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Movie Theatre</a>
+                <a class="navbar-brand" href="#"> 
+                    <img  src="{% static 'media/movie_logo.png' %}" style="width:40px;" alt="Movie Logo">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -24,7 +28,11 @@
                             <a class="nav-link" href="booking_history">Booking History</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="accounts/login">Login</a>
+                            {% if user.is_authenticated %}
+                                <a class="nav-link" href="accounts/logout">Logout</a>
+                            {% else %}
+                                <a class="nav-link" href="accounts/login">Login</a>
+                            {% endif %}
                         </li>     
                     </ul>
                 </div>

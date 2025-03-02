@@ -5,8 +5,8 @@ from . import views
 from .views import MovieViewSet, SeatViewSet, BookingViewSet
 
 router = DefaultRouter()
-router.register(r'movies', MovieViewSet)
-router.register(r'seats', SeatViewSet)
+router.register(r'movies', MovieViewSet, basename='movies')
+router.register(r'seats', SeatViewSet, basename='seats')
 router.register(r'bookings', BookingViewSet, basename='booking')
 
 urlpatterns = [

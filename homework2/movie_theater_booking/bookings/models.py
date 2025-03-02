@@ -9,6 +9,8 @@ class Movie(models.Model):
     description = models.TextField()
     release_date = models.DateField()
     duration = models.PositiveIntegerField(help_text="Duration of movie in minutes")
+    trailer_url = models.URLField(blank=True, null=True)
+    poster = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title

@@ -1,0 +1,9 @@
+AI Assistance: 
+Anthropic. (2025). Claude [AI assistant]. Retrieved from https://claude.ai
+- Generated serializers for models: Movie, Seat, and Booking.
+- Generated clean_seat under BookingForm in forms.py
+- Generated in generating book_seat under views.py
+
+To use:
+In a virtual environment, install django, django rest framework, bootstrap5, and Pillow
+

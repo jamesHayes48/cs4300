@@ -7,6 +7,14 @@
         <li class='list-group-item'>
             <h5>{{movie.title}}</h5>
             <p>{{movie.description}}</p>
+            <!--Display Movie poster and trailer embbedded if the movie has it-->
+            {% if movie.poster %}
+            <p>
+                <a href="{{ movie.trailer_url }}" target="_blank">
+                    <img src="{{ movie.poster.url }}" style="width:15%; float: right" alt="Movie Poster">
+                </a>
+            </p>
+            {% endif %}
             <p>Released: {{movie.release_date}}</p>
             <p>Duration: {{movie.duration}} minutes</p>
             <a href="{% url 'book_seat' movie.id %}" class="btn btn-primary">Book Now</a>

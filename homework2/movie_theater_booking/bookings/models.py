@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.timezone import now
+import datetime
 
 # Create your models here.
 class Movie(models.Model):
@@ -28,7 +29,7 @@ class Booking(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.PROTECT)
     seat = models.ForeignKey(Seat, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    booking_date = models.DateField(default=now)
+    booking_date = models.DateField(default=now, validators=[MinValueValidator(datetime.date.today()), MaxValueValidator(datetime.timedelta(days=90))])
 
     class Meta:
         unique_together = ('seat', 'booking_date', 'user')

@@ -38,7 +38,7 @@ class SeatViewSet(viewsets.ModelViewSet):
     serializer_class = SeatSerializer
     
     def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve':
+        if self.action == 'list' or self.action == 'retrieve' or self.action == 'available':
             permission_classes = [permissions.AllowAny]
         else:
             permission_classes = [permissions.IsAdminUser]
@@ -58,10 +58,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-    # Return only bookings belonging to the user
-    def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)
 
     # Override create method in DRF
     def create(self, request, *args, **kwargs):
@@ -83,11 +79,13 @@ class BookingViewSet(viewsets.ModelViewSet):
         seat.booking_status = True
         seat.save()
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            booking = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=['get'])
     def booking_history(self, request):
-        user_bookings = self.get_queryset()
+        user_bookings = Booking.objects.filter(user=self.request.user)
         serializer = BookingSerializer(user_bookings, many=True)
         return Response(serializer.data)
 

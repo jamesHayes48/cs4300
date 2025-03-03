@@ -143,6 +143,15 @@ class BookingViewTestCase(APITestCase):
         response = self.client.post(url, valid_booking, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    # Test creation of booking by an anonymous user
+    def test_booking_creation_anonymous(self):
+        self.client.logout()
+        valid_booking = {"movie": self.Movie_1.id, "seat": self.seat_12.id, "user": self.reg_user.id, 
+            "booking_date": datetime.date.today()}
+        url = reverse("booking-list")
+        response = self.client.post(url, valid_booking, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_booking_history(self):
         self.client.force_authenticate(user=self.reg_user)
 

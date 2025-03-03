@@ -4,6 +4,13 @@ Anthropic. (2025). Claude [AI assistant]. Retrieved from https://claude.ai
 - Generated clean_seat under BookingForm in forms.py
 - Generated in generating book_seat under views.py
 
-To use:
-In a virtual environment, install django, django rest framework, bootstrap5, and Pillow
+AI assistance was used for generating the three viewsets, clean_seat function under the BookingForm, and book_seat on views.py
 
+How To Run:
+- In a virtual environment, install 
+    - django 
+    - django rest framework  
+    - bootstrap5 
+    - Pillow
+
+Usage: This i

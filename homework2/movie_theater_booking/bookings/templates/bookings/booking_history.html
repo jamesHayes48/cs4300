@@ -5,9 +5,16 @@
 <ul class='list-group'>
     {% for booking in bookings %}
         <li class='list-group-item'>
-            <h5>Date: {{booking.booking_date}}</h5>
+            <h5>Showing Date: {{booking.booking_date}}</h5>
             <h5>Seat Number: {{booking.seat.seat_number}}</h5>
             <h5>{{booking.movie.title}}</h5>
+            {% if booking.movie.poster %}
+            <p>
+                <a href="{{ booking.movie.trailer_url }}" target="_blank">
+                    <img src="{{ booking.movie.poster.url }}" style="width:15%; float: right" alt="Movie Poster">
+                </a>
+            </p>
+            {% endif %}
             <p>{{booking.movie.description}}</p>
             <p>Released: {{booking.movie.release_date}}</p>
             <p>Duration: {{booking.movie.duration}} minutes</p>

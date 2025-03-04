@@ -7,10 +7,28 @@ Anthropic. (2025). Claude [AI assistant]. Retrieved from https://claude.ai
 AI assistance was used for generating the three viewsets, clean_seat function under the BookingForm, and book_seat on views.py
 
 How To Run:
-- In a virtual environment, install 
+- In a virtual environment, install: 
     - django 
     - django rest framework  
     - bootstrap5 
     - Pillow
 
-Usage: This i
+- In DevEdu:
+    - Run 'python manage.py runserver 0.0.0.0:3000'
+    - Click on App in DevEdu 
+
+Usage:
+- Login:
+    - Allows users to login and is required for booking and booking history
+      
+- Movie List:
+    - Can click on the posters to see the trailer for movie on YouTube
+    - Can click on book now to book a seat for the movie
+
+- Book Seats:
+    - Can select dates, but minimum on current day and up to 90 days
+    - Problems:
+        - Seats are universal, should make them theatres
+
+- API:
+    - Allow users to access the same processes, but under the API root

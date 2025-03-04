@@ -7,7 +7,7 @@
         <li class='list-group-item'>
             <h5>Showing Date: {{booking.booking_date}}</h5>
             <h5>Seat Number: {{booking.seat.seat_number}}</h5>
-            <h5>{{booking.movie.title}}</h5>
+            <h5>Movie: {{booking.movie.title}}</h5>
             {% if booking.movie.poster %}
             <p>
                 <a href="{{ booking.movie.trailer_url }}" target="_blank">

@@ -1,7 +1,13 @@
 {% extends 'bookings/base.html' %}
 {% block title %}Seat Booking{% endblock %}
 {% block content %}
-    <h2>Book Seat for {{movie.title}}</h2>
+    <h2>Book Seat for {{movie.title}}
+        {% if movie.poster %}
+            <img src="{{ movie.poster.url }}" style="width:15%; float: right;" alt="Movie Poster">
+        {% endif %}
+    </h2>
+            
+    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

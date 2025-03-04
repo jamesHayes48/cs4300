@@ -12,6 +12,11 @@
             .navbar-nav .nav-link:hover {
                 color: #002040 !important;
             }
+
+            .content {
+                background-color: powderblue;
+            }
+
         </style>
 
         <meta charset="utf-8">
@@ -37,10 +42,10 @@
                             <a class="nav-link" href="{% url 'movie_list' %}">Movie List</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="booking_history">Booking History</a>
+                            <a class="nav-link" href="{% url 'booking_history' %}">Booking History</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="api">API</a>
+                            <a class="nav-link" href="/api/">API</a>
                         </li>
                         <li>
                             {% if user.is_authenticated %}
@@ -54,8 +59,10 @@
             </div>
         </nav>
         <div class="container mt-4">
-            {% block content %}
-            {% endblock content %}
+            <body class="content">
+                {% block content %}
+                {% endblock content %}
+            </body>
         </div>
     </body>
 </html>

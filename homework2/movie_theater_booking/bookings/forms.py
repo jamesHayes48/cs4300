@@ -12,7 +12,7 @@ class BookingForm(forms.ModelForm):
     
     # Enforce that dates cannot be entered before the current day and dates can be up to 90 days in advance
     date = forms.DateField(widget=forms.SelectDateWidget(), 
-        validators=[MinValueValidator(datetime.date.today()), MaxValueValidator(datetime.timedelta(days=90))], 
+        validators=[MinValueValidator(datetime.date.today()), MaxValueValidator(datetime.date.today() + datetime.timedelta(days=90))], 
         label="Date", initial=now)
     
     class Meta:
